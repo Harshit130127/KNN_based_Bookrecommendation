@@ -22,7 +22,7 @@ import seaborn as sns
 
 
 
-df = pd.read_csv("dataset\\books.csv", on_bad_lines = 'skip')
+df = pd.read_csv(r"dataset/books.csv", on_bad_lines = 'skip')
 
 
 
@@ -49,9 +49,9 @@ df['year'].min()
 df['year'].max()
 
 
-df.to_csv('dataset\cleaned_data.csv',index=False)
+df.to_csv(r'dataset/cleaned_data.csv',index=False)
 
-df=pd.read_csv('dataset\cleaned_data.csv')
+df=pd.read_csv(r'dataset/cleaned_data.csv')
 
 df[df['year'] == 2020][['title', 'authors','average_rating','language_code','publisher' ]]
 
@@ -152,7 +152,7 @@ dist, idlist = model.kneighbors(features_scaled)
 
 def normalize_title(title):
     """ Normalize title by removing unwanted characters and converting to lowercase. """
-    return re.sub(r'[^\w\s#()]', '', title).lower().strip()
+    return re.sub(r'[^\w\s#():""-]', '', title).lower().strip()
 
 def BookRecommender(book_name):
     book_list_info = []
@@ -163,28 +163,27 @@ def BookRecommender(book_name):
     # Normalize dataset titles for comparison
     df['normalized_title'] = df['title'].apply(normalize_title)
     
-    # Check if the input contains special characters
-    if re.search(r'[^\w\s]', book_name):  # Check for any non-word character
-        # Logic for inputs with symbols
+    #  if the input contains special characters
+    if re.search(r'[^\w\s#():""-]', book_name): 
+        
         print("Input contains special characters.")
         # book_id_row = df[df['normalized_title'].str.extract(re.escape(normalized_input), na=False, case=False)]
         book_id_row = df[df['normalized_title'].str.extract(normalized_input)]
         
-        # You can implement specific logic here for inputs with symbols if needed
+        
         
     else:
         # Logic for simple string inputs
         print("Input is a simple string.")
         book_id_row = df[df['normalized_title'].str.contains(re.escape(normalized_input), na=False, case=False)]
-        
-        # You can implement specific logic here for simple strings if needed
+    
 
     if not book_id_row.empty:
         book_id = book_id_row.index[0]
         
         book_list_info.append(f"{df.iloc[book_id].title} by {df.iloc[book_id].authors}")
         
-        # Assuming idlist is defined elsewhere in your code
+        
         for newid in idlist[book_id]:
             if newid != book_id:
                 recommended_title = df.iloc[newid].title
@@ -210,6 +209,17 @@ def recommend_by_rating(min_rating):
 
 def recommend_by_publisher(publisher_name):
     filtered_books = df[df['publisher'].str.lower() == publisher_name.lower()]
+    
+    top_books = filtered_books.sort_values(by='average_rating', ascending=False).head(30)  #get top 25 books
+    
+    book_list_info = [f"{row['title']} by {row['authors']}" for index, row in top_books.iterrows()]
+    
+    return book_list_info
+
+
+
+def recommend_by_author(author_name):
+    filtered_books = df[df['publisher'].str.lower() == author_name.lower()]
     
     top_books = filtered_books.sort_values(by='average_rating', ascending=False).head(30)  #get top 25 books
     

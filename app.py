@@ -10,7 +10,7 @@ from Model.model import BookRecommender, recommend_by_rating, recommend_by_publi
 app = Flask(__name__)
 
 # Load dataset
-df = pd.read_csv('dataset\cleaned_data.csv')
+df = pd.read_csv(r'dataset/cleaned_data.csv')
 print(df.head(5))
 
 # Configure logging to write to app.log
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 def normalize_title(title):
     """ Normalize title by removing unwanted characters and converting to lowercase. """
-    return re.sub(r'[^\w\s#()]', '', title).lower().strip()
+    return re.sub(r'[^\w\s#()""-:]', '', title).lower().strip()
 
 @app.route('/')
 def index():
@@ -28,20 +28,6 @@ def index():
     return render_template('index.html', title_recommendations=[], rating_recommendations=[], publisher_recommendations=[])
 
 
-# @app.route('/recommend_by_book', methods=['POST'])
-# def recommend_by_book():
-#     book_name = request.form.get('book_name', '').strip()  # Normalize input
-#     logger.info(f"Received book recommendation request for: {book_name}")
-    
-#     title_recommendations = BookRecommender(book_name) if book_name else []
-    
-#     if title_recommendations:
-#         logger.info(f"Recommendations found for {book_name}: {title_recommendations}")
-#     else:
-#         logger.warning("No recommendations found for the given book name.")
-    
-#     return render_template('recommendations.html', title_recommendations=title_recommendations,
-#                            rating_recommendations=[], publisher_recommendations=[])
 
 @app.route('/recommend_by_book', methods=['POST'])
 def recommend_by_book():
@@ -51,8 +37,8 @@ def recommend_by_book():
     title_recommendations = BookRecommender(book_name) if book_name else []
     
     # Ensure pagination variables are defined
-    current_page = 1  # Default to page 1
-    total_pages = 1   # Default to 1 page (adjust if needed)
+    current_page = 1
+    total_pages = 1   
 
     if title_recommendations:
         logger.info(f"Recommendations found for {book_name}: {title_recommendations}")
@@ -74,12 +60,12 @@ def recommend_by_publisher_route():
     publisher = request.form.get('publisher')
     logger.info(f"Received publisher recommendation request for: {publisher}")
     
-    # Get recommendations based on the publisher
+    
     publisher_recommendations = recommend_by_publisher(publisher) if publisher else []
     
     # Ensure pagination variables are defined
-    current_page = 1  # Default to page 1
-    total_pages = 1  # Default to 1 page (adjust if needed)
+    current_page = 1  
+    total_pages = 1  
 
     if publisher_recommendations:
         logger.info(f"Recommendations found for publisher {publisher}: {publisher_recommendations}")
@@ -181,11 +167,6 @@ def search_books():
 
 
 
-@app.route('/recommendations')
-def recommend():
-    logger.info("Accessed the recommendations page.")
-    return render_template('index.html')
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run( debug=True)
+    app.run(host= '0.0.0.0' , port=5000 ,debug=True)
