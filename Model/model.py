@@ -218,11 +218,61 @@ def recommend_by_publisher(publisher_name):
 
 
 
+# def recommend_by_author(author_name):
+#     filtered_books = df[df['publisher'].str.lower() == author_name.lower()]
+    
+#     top_books = filtered_books.sort_values(by='average_rating', ascending=False).head(30)  #get top 25 books
+    
+#     book_list_info = [f"{row['title']} by {row['authors']}" for index, row in top_books.iterrows()]
+    
+#     return book_list_info
+# def recommend_by_author(author_name):
+#     filtered_books = df[df['authors'].str.lower() == author_name.lower()]
+    
+#     top_books = filtered_books.sort_values(by='average_rating', ascending=False).head(30)  # get top 30 books
+    
+#     book_list_info = [f"{row['title']} by {row['authors']}" for index, row in top_books.iterrows()]
+    
+#     return book_list_info
+import re
+
+def normalize_author(author):
+    """ Normalize author name by removing unwanted characters and converting to lowercase. """
+    return re.sub(r'[^\w\s#():""-]', '', author).lower().strip()
+
+
 def recommend_by_author(author_name):
-    filtered_books = df[df['publisher'].str.lower() == author_name.lower()]
+    author_list_info = []
     
-    top_books = filtered_books.sort_values(by='average_rating', ascending=False).head(30)  #get top 25 books
+    # Normalize input
+    normalized_input = normalize_author(author_name)
     
-    book_list_info = [f"{row['title']} by {row['authors']}" for index, row in top_books.iterrows()]
+    # Normalize dataset authors for comparison
+    df['normalized_authors'] = df['authors'].apply(normalize_author)
     
-    return book_list_info
+    # Check if the input contains special characters
+    if re.search(r'[^\w\s#():""-]', author_name): 
+        print("Input contains special characters.")
+        # Use str.contains instead of str.extract
+        author_id_row = df[df['normalized_authors'].str.contains(re.escape(normalized_input), na=False, case=False)]
+    else:
+        # Logic for simple string inputs
+        print("Input is a simple string.")
+        author_id_row = df[df['normalized_authors'].str.contains(re.escape(normalized_input), na=False, case=False)]
+    
+    if not author_id_row.empty:
+        author_id = author_id_row.index[0]
+        
+        author_list_info.append(f"{df.iloc[author_id].title} by {df.iloc[author_id].authors}")
+        
+        # Assuming `idlist` is defined similarly to the BookRecommender function
+        for newid in idlist[author_id]:
+            if newid != author_id:
+                recommended_title = df.iloc[newid].title
+                recommended_author = df.iloc[newid].authors
+                author_list_info.append(f"{recommended_title} by {recommended_author}")
+                
+    else:
+        print(f"Author '{author_name}' not found in the database.")
+    
+    return author_list_info

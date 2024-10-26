@@ -103,27 +103,34 @@
 <h2>Based on your search:</h2>
 
 <ul class="results">
-   {% if title_recommendations %}
-       <h3>Title Recommendations:</h3>
-       {% for title in title_recommendations %}
-           <li>{{ title }}</li>
-       {% endfor %}
-   {% endif %}
-   
-   {% if rating_recommendations %}
-       <h3>Rating Recommendations:</h3>
-       {% for rating in rating_recommendations %}
-           <li>{{ rating }}</li>
-       {% endfor %}
-   {% endif %}
-   
-   {% if publisher_recommendations %}
-       <h3>Publisher Recommendations:</h3>
-       {% for publisher in publisher_recommendations %}
-           <li>{{ publisher }}</li>
-       {% endfor %}
-   {% endif %}
-</ul>
+    {% if title_recommendations %}
+        <h3>Title Recommendations:</h3>
+        {% for title in title_recommendations %}
+            <li>{{ title }}</li>
+        {% endfor %}
+    {% endif %}
+    
+    {% if rating_recommendations %}
+        <h3>Rating Recommendations:</h3>
+        {% for rating in rating_recommendations %}
+            <li>{{ rating }}</li>
+        {% endfor %}
+    {% endif %}
+    
+    {% if publisher_recommendations %}
+        <h3>Publisher Recommendations:</h3>
+        {% for publisher in publisher_recommendations %}
+            <li>{{ publisher }}</li>
+        {% endfor %}
+    {% endif %}
+ 
+    {% if author_recommendations %}
+        <h3>Author Recommendations:</h3>
+        {% for author in author_recommendations %}
+            <li>{{ author }}</li>
+        {% endfor %}
+    {% endif %}
+ </ul>
 
 <!-- Pagination Controls -->
 <div class="pagination">

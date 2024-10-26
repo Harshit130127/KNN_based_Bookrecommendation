@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import logging
 import re
-from Model.model import BookRecommender, recommend_by_rating, recommend_by_publisher
+from Model.model import BookRecommender, recommend_by_rating, recommend_by_publisher,recommend_by_author
 
 
 
@@ -25,7 +25,7 @@ def normalize_title(title):
 @app.route('/')
 def index():
     logger.info("Accessed the index page.")
-    return render_template('index.html', title_recommendations=[], rating_recommendations=[], publisher_recommendations=[])
+    return render_template('index.html', title_recommendations=[], rating_recommendations=[], publisher_recommendations=[],author_recommendations=[])
 
 
 
@@ -49,6 +49,7 @@ def recommend_by_book():
                            title_recommendations=title_recommendations,
                            rating_recommendations=[], 
                            publisher_recommendations=[],
+                           author_recommendations=[],
                            current_page=current_page,
                            total_pages=total_pages)
 
@@ -87,6 +88,7 @@ def recommend_by_publisher_route():
     return render_template('recommendations.html',
                            title_recommendations=[], 
                            rating_recommendations=[], 
+                           author_recommendations=[],
                            publisher_recommendations=paginated_recommendations,
                            current_page=current_page,
                            total_pages=total_pages)
@@ -123,6 +125,7 @@ def recommend_by_rating_route():
         return render_template('recommendations.html', 
                                title_recommendations=[], 
                                rating_recommendations=recommendations_to_display, 
+                               author_recommendations=[],
                                publisher_recommendations=[], 
                                current_page=page, 
                                total_pages=total_pages)
@@ -151,6 +154,42 @@ def recommend_by_rating_route():
                                current_page=page,
                                total_pages=total_pages)
 
+
+@app.route('/recommend_by_author', methods=['POST'])
+def recommend_by_author_route():
+    author = request.form.get('author', '').strip()
+    logger.info(f"Received author recommendation request for: {author}")
+    
+    author_recommendations = recommend_by_author(author) if author else []
+    
+    # Ensure pagination variables are defined
+    current_page = 1
+    total_pages = 1
+
+    if author_recommendations:
+        logger.info(f"Recommendations found for author {author}: {author_recommendations}")
+        
+        # Pagination logic
+        items_per_page = 25
+        total_recommendations = len(author_recommendations)
+        
+        # Calculate total pages based on the number of recommendations
+        total_pages = (total_recommendations + items_per_page - 1) // items_per_page
+        
+        # Optionally, you can slice the recommendations for pagination
+        paginated_recommendations = author_recommendations[:items_per_page]  # Get only the first page of results
+        
+    else:
+        logger.warning("No recommendations found for the given author.")
+        paginated_recommendations = []  # No recommendations to paginate
+
+    return render_template('recommendations.html',
+                           title_recommendations=[], 
+                           rating_recommendations=[], 
+                           publisher_recommendations=[], 
+                           author_recommendations=paginated_recommendations,
+                           current_page=current_page,
+                           total_pages=total_pages)
 
 @app.route('/search_books')
 def search_books():
