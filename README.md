@@ -45,3 +45,29 @@ Run the application:
 python app.py
 
 Access the application in your browser at http://127.0.0.1:5000.
+
+
+💻 Usage
+Navigate to the home page.
+Use the search forms to find book recommendations based on title, rating, or publisher.
+View the recommendations displayed on a new page.
+
+🔍 How It Works
+The application uses a collaborative filtering approach with a nearest neighbors algorithm to recommend books based on user input:
+Data Preparation: The dataset is cleaned and processed using Pandas, with relevant features extracted for modeling.
+
+Recommendation Logic:
+By Title: Normalizes input titles and finds similar titles using a nearest neighbors model.
+By Rating: Filters books based on the minimum rating specified by the user.
+By Publisher: Retrieves books from a specific publisher and sorts them by average rating.
+User Interface: Built with HTML/CSS for structure and styling, enhanced with JavaScript for dynamic interactions.
+
+🤝 Contributors
+This project is maintained by:
+Harshit Mishra 👤
+Harshit Khandelwal 👤
+Harshvardhan Singh Shekhawat 👤
+Mayank Upadhyay 👤
+Krishna Kumar 👤
+Mohit Kumar 👤
+Madhav Kumar👤
