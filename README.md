@@ -16,23 +16,34 @@ Welcome to the Book Recommendation System! 🌟 This dynamic web application is 
 ✨ Features
 
 1.Search by Book Title: Get recommendations based on your favorite book. 📖
+
 2.Search by Minimum Rating: Discover top-rated books that meet your rating criteria. ⭐
+
 3.Search by Publisher: Find books published by your favorite publishers. 🏢
+
 4.Search by Author: Get recommendations based on your favorite authors. ✍️
+
 5.Live Search Suggestions: As you type a book title, suggestions will appear to help you find the right book quickly. 🔍
+
 6.Responsive Design: The application is designed to work seamlessly on various devices. 📱💻
 
 ⚙️ Technologies Used
 
 1.Flask: A lightweight WSGI web application framework in Python.
+
 2.Pandas: For data manipulation and analysis.
+
 3.NumPy: For numerical computations.
+
 4.Scikit-learn: For implementing machine learning algorithms for book recommendations.
+
 5.HTML/CSS: For front-end development and styling.
+
 6.JavaScript: For dynamic content updates and user interaction.
 
 🛠️ Installation
 To set up the project locally, follow these steps:
+
 Clone the repository:
 
 git clone https://github.com/Harshit130127/Machinelearning_based_Bookrecommendation.git
@@ -64,10 +75,15 @@ The application uses a collaborative filtering approach with a nearest neighbors
 Data Preparation: The dataset is cleaned and processed using Pandas, with relevant features extracted for modeling.
 
 Recommendation Logic:
+
 By Title: Normalizes input titles and finds similar titles using a nearest neighbors model.
+
 By Rating: Filters books based on the minimum rating specified by the user.
+
 By Publisher: Retrieves books from a specific publisher and sorts them by average rating.
+
 By Author: Filters books by a specific author and returns recommendations sorted by average rating.
+
 User Interface: Built with HTML/CSS for structure and styling, enhanced with JavaScript for dynamic interactions.
 
 🤝 Contributors
@@ -78,4 +94,4 @@ Harshvardhan Singh Shekhawat 👤
 Mayank Upadhyay 👤
 Krishna Kumar 👤
 Mohit Kumar 👤
-Madhav Kumar 👤
+
