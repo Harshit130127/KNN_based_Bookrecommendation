@@ -87,6 +87,7 @@ By Author: Filters books by a specific author and returns recommendations sorted
 User Interface: Built with HTML/CSS for structure and styling, enhanced with JavaScript for dynamic interactions.
 
 🤝 Contributors
+
 This project is maintained by:
 Harshit Mishra 👤
 Harshit Khandelwal 👤
@@ -94,4 +95,5 @@ Harshvardhan Singh Shekhawat 👤
 Mayank Upadhyay 👤
 Krishna Kumar 👤
 Mohit Kumar 👤
+Madhav Kumar 👤
 
