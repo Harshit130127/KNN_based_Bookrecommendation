@@ -18,17 +18,17 @@ Welcome to the Book Recommendation System! 🌟 This dynamic web application is 
 
 The dataset contains 11,128 rows  with the following 12 columns:
 
-bookID
-title
-authors
-average_rating
-isbn
-isbn13
-language_code
-num_pages
-ratings_count
-text_reviews_count
-publication_date
+bookID,
+title,
+authors,
+average_rating,
+isbn,
+isbn13,
+language_code,
+num_pages,
+ratings_count,
+text_reviews_count,
+publication_date,
 publisher
 
 
