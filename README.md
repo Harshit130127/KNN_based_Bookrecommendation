@@ -96,5 +96,4 @@ Harshvardhan Singh Shekhawat 👤
 Mayank Upadhyay 👤
 Krishna Kumar 👤
 Mohit Kumar 👤
-Madhav Kumar 👤
 
