@@ -77,13 +77,13 @@ Data Preparation: The dataset is cleaned and processed using Pandas, with releva
 
 Recommendation Logic:
 
-By Title: Normalizes input titles and finds similar titles using a nearest neighbors model.
+1. By Title:Checks if the input title exists in the dataset, retrieves its index, and creates a feature vector. It then uses a nearest neighbors model to find similar titles, including the original book in the recommendations, and limits the output to a maximum of 30 titles.
 
-By Rating: Filters books based on the minimum rating specified by the user.
+2. By Rating:Filters the dataset for books that meet or exceed a specified minimum average rating, sorts these books in descending order by their ratings, and returns a list of the top 100 books that match the criteria.
 
-By Publisher: Retrieves books from a specific publisher and sorts them by average rating.
+3. By Publisher:Retrieves books published by a specified publisher. If the number of books is less than 30, it constructs a feature vector based on the input publisher and average values for continuous features to find similar publishers. It then recommends additional books from those publishers, ensuring the total recommendations do not exceed 30.
 
-By Author: Filters books by a specific author and returns recommendations sorted by average rating.
+4. By Author:Filters books by a specified author and retrieves their titles. If the number of books is less than 30, it constructs a feature vector to find similar authors and recommends additional titles from those authors, again ensuring the total does not exceed 30 recommendations.
 
 User Interface: Built with HTML/CSS for structure and styling, enhanced with JavaScript for dynamic interactions.
 
