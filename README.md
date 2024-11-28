@@ -16,7 +16,7 @@ Welcome to the Book Recommendation System! 🌟 This dynamic web application is 
 
 📊 Dataset Information
 
-The dataset contains 11,128 rows with the following columns:
+The dataset contains 11,128 rows  with the following 12 columns:
 
 bookID
 title
