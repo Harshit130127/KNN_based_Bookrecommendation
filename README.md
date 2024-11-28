@@ -6,12 +6,30 @@ Welcome to the Book Recommendation System! 🌟 This dynamic web application is 
 
 📋 Table of Contents
 
-1.Features
-2.Technologies Used
-3.Installation
-4.Usage
-5.How It Works
-6.Contributors
+1.Dataset Information
+2.Features
+3.Technologies Used
+4.Installation
+5.Usage
+6.How It Works
+7.Contributors
+
+📊 Dataset Information
+
+The dataset contains 11,128 rows with the following columns:
+
+bookID
+title
+authors
+average_rating
+isbn
+isbn13
+language_code
+num_pages
+ratings_count
+text_reviews_count
+publication_date
+publisher
 
 
 ✨ Features
