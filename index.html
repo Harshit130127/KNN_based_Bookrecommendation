@@ -5,208 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Book Recommendation System</title>
-    <style>
-        /* General Styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5; /* Light background */
-            color: #333; /* Dark text for contrast */
-        }
+    <title>Bookwizard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-        h1, h2, h3 {
-            color: #3a3a3a; /* Consistent heading color */
-        }
-
-        /* Navbar Styling */
-        .navbar {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            justify-content: space-around;
-            background-color: rgba(0, 123, 255, 0.9); /* Slightly transparent blue */
-            padding: 1rem;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
-            backdrop-filter: blur(8px); /* Adds a blur effect for a frosted glass look */
-        }
-
-        /* Navbar link styling */
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        /* Hover effect for links */
-        .navbar a:hover {
-            color: #ffcccb; /* Light coral color on hover */
-            transform: translateY(-3px); /* Slight lift effect */
-        }
-
-        /* Underline effect on hover */
-        .navbar a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -3px;
-            width: 100%;
-            height: 2px;
-            background-color: #ffcccb;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .navbar a:hover::after {
-            transform: scaleX(1); 
-        }
-        
-        /* Section Styling */
-        .section {
-            padding: 0; /* Reset padding to use full height */
-            text-align: center;
-            height: 100vh; /* Ensure sections take full viewport height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .hero {
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient background */
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        .hero a {
-            background: #fff;
-            color: #ff7e5f;
-            padding: 15px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        .hero a:hover {
-            background: #ff7e5f;
-            color: white;
-        }
-
-        /* Form Styling */
-        form {
-          margin: 20px auto; 
-          padding: 20px; 
-          background-color: #ffffff; 
-          border-radius: 8px; 
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
-          max-width: 400px; 
-      }
-
-      input[type="text"],
-      input[type="number"],
-      button {
-          width: calc(100% - 20px); 
-          padding: 10px; 
-          margin-top: 10px; 
-          border-radius: 5px ; 
-          border: 1px solid #ccc; 
-      }
-
-      button {
-          background-color: #007bff; 
-          color: white; 
-          font-weight: bold; 
-          cursor: pointer; 
-          border: none; 
-      }
-
-      button:hover {
-          background-color: #0056b3; 
-      }
-
-      /* Suggestions Styling */
-      .suggestions {
-          position: absolute; 
-          background-color: white; 
-          border: 1px solid #ccc; 
-          z-index: 1000; 
-          max-height: 150px; 
-          overflow-y: auto; 
-          width: calc(100% - 20px); 
-      }
-
-      .suggestions div {
-          padding: 10px; 
-          cursor: pointer; 
-      }
-
-      .suggestions div:hover {
-          background-color: #f0f0f0; 
-      }
-
-      /* Footer Styling */
-      .footer {
-          background-color: #333; 
-          color: white; 
-          padding: 20px; 
-          text-align: center; 
-      }
-
-      /* Results Styling */
-      .results {
-          margin-top: 20px; 
-          list-style-type: none; 
-          padding: 0; 
-      }
-
-      .results li {
-          background-color: #e9ecef; 
-          margin: 5px 0; 
-          padding: 10px; 
-          border-radius: 5px; 
-      }
-
-      /* Additional Section Styles for Consistency */
-      .other-section {
-          background-color: #ffffff; /* Light background for other sections */
-          height: 100vh; /* Full viewport height */
-          display: flex; 
-          align-items: center; 
-          justify-content: center; 
-          flex-direction: column; 
-      }
-
-
-      /* Pagination Controls */
-      .pagination {
-           text-align: center;
-           margin-top: 20px
-       }
-       
-       .pagination a {
-           margin-right: 10px
-       }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -223,9 +26,20 @@
 
 <!-- Hero Section -->
 <section id="hero" class="section hero">
-    <h1>Welcome to the Book Recommendation System</h1>
-    <p>Discover your next great read! Get personalized book recommendations based on your favorite titles, minimum ratings, or preferred publishers. Dive into a world of books tailored just for you!</p>
-    <a href="#recommendations">Get Started</a>
+    <h1 id="flashing-text">
+        <span>B</span>
+        <span>O</span>
+        <span>O</span>
+        <span>K</span>
+        <span>W</span>
+        <span>I</span>
+        <span>Z</span>
+        <span>A</span>
+        <span>R</span>
+        <span>D</span>
+      </h1>
+    <!-- <p>Discover your next great read! Get personalized book recommendations based on your favorite titles, minimum ratings, or preferred publishers. Dive into a world of books tailored just for you!</p> -->
+    <a id="start" href="#recommendations">Get Started</a>
 </section>
 
 <section id="recommendations" class="section">
@@ -271,51 +85,60 @@
 </section>
 
 
-<!-- Footer -->
-<footer class="footer">
-   <p>Contributors:</p>
-   <ul style="list-style-type:none;">
-       <li>Harshit Mishra</li>
-       <li>Harshit Khandelwal</li>
-       <li>Harshvardhan Singh Shekhawat</li>
-       <li>Mayank Upadhyay</li>
-   </ul>
-   <p>&copy;2024 Book Recommendation System. All rights reserved.</p>
-</footer>
 
 <script>
     // JavaScript for live search suggestions
-    const input = document.getElementById('book_name');
-    const suggestions = document.getElementById('suggestions');
     
-    input.addEventListener('input', async () => {
-        const query = input.value.trim();
-        if (query.length > 0) {
-            const response = await fetch(`/search_books?query=${query}`);
-            const data = await response.json();
-            
-            suggestions.innerHTML = data.map(book => `<div>${book}</div>`).join('');
-            
-            // Add click event to suggestions
-            suggestions.querySelectorAll('div').forEach(item => {
-               item.addEventListener('click', () => {
-                   input.value = item.innerText.trim(); // Set input value to clicked suggestion
-                   suggestions.innerHTML = ''; // Clear suggestions
-                   document.getElementById('search-form').submit(); // Submit the form with selected title
-               });
-           });
-       } else {
-           suggestions.innerHTML = '';
-       }
-    });
-    
-    // Hide suggestions when clicking outside
-    document.addEventListener('click', (event) => {
-       if (!event.target.closest('#search-form')) {
-           suggestions.innerHTML = '';
-       }
-    });
-    </script>
+  // JavaScript for live search suggestions
+const input = document.getElementById('book_name');
+const suggestions = document.getElementById('suggestions');
+
+// Hide suggestions initially
+suggestions.style.display = 'none';
+
+input.addEventListener('input', async () => {
+    const query = input.value.trim();
+    if (query.length > 0) {
+        const response = await fetch(`/search_books?query=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        // Clear previous suggestions
+        suggestions.innerHTML = '';
+
+        // Populate new suggestions
+        if (data.length > 0) {
+            data.forEach(book => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.textContent = book;
+                suggestionItem.addEventListener('click', () => {
+                    input.value = book; // Set input value to clicked suggestion
+                    suggestions.innerHTML = ''; // Clear suggestions
+                    suggestions.style.display = 'none'; // Hide suggestions after selection
+                    document.getElementById('search-form').submit(); // Submit the form with selected title
+                });
+                suggestions.appendChild(suggestionItem);
+            });
+            suggestions.style.display = 'block'; // Show dropdown if there are suggestions
+        } else {
+            const noResultsItem = document.createElement('div');
+            noResultsItem.textContent = 'No results found';
+            suggestions.appendChild(noResultsItem);
+            suggestions.style.display = 'block'; // Show dropdown even if no results found
+        }
+    } else {
+        suggestions.innerHTML = ''; // Clear suggestions if input is empty
+        suggestions.style.display = 'none'; // Hide dropdown when input is empty
+    }
+});
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('#search-form')) {
+        suggestions.innerHTML = ''; // Clear suggestions when clicking outside
+        suggestions.style.display = 'none'; // Hide dropdown when clicking outside
+    }
+});
+</script>
     
     </body>
     </html>
