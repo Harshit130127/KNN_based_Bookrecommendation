@@ -13,7 +13,7 @@ logging.basicConfig(filename='train_model.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load your dataset
-df = pd.read_csv(r'C:\Users\user\OneDrive\diug\OneDrive\Desktop\Book-Recommendation-system\dataset\cleaned_data.csv')
+df = pd.read_csv(r'dataset\cleaned_data.csv')
 
 # Data preprocessing and feature engineering
 def num_to_obj(x):
